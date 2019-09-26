@@ -44,7 +44,6 @@ public class Farm {
 	public Date getCreationDate() {
 		return this.creationDate;
 	}
-	
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	} 
@@ -68,7 +67,6 @@ public class Farm {
 	public int getChickensAmount() {
 		return this.chickens.size();
 	}
-	
 
 	public int getEggsAmountTotal() {
 		int eggsAmount = 0;
@@ -79,7 +77,7 @@ public class Farm {
 	}
 
 	public void deleteChicken(Chicken chicken){
-		//Chicken chickenToDelete = this.chickens.get( (int) chicken.getId());
+		Chicken chickenToDelete = this.chickens.get( (int) chicken.getId());
 		chickens.remove(chicken);
 	}
 }

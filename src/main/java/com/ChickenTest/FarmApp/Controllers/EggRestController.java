@@ -7,11 +7,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ChickenTest.FarmApp.Models.Egg;
 import com.ChickenTest.FarmApp.Repositories.EggRepository;
 
-@org.springframework.web.bind.annotation.RestController
+
+@RestController
 @RequestMapping("/api")
 public class EggRestController {
 
@@ -19,12 +21,12 @@ public class EggRestController {
 	    private EggRepository EggRepository;
 	  
 	    @RequestMapping("/eggs")
-	    public List<Object> getEggs(){
-	    	return ((Collection<Egg>) EggRepository
+	    public List<Object> getEggs(){ // Aqui llama a los services
+	    	return ((Collection<Egg>) EggRepository // desde aqui
 	    			.findAll())
 	    			.stream()
 	    			.map(egg -> eggDTO(egg))
-	    			.collect(Collectors.toList());
+	    			.collect(Collectors.toList()); // hasta aca
 	    }
 	    
 	    public Map<String, Object> eggDTO(Egg egg){

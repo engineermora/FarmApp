@@ -5,32 +5,24 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RestController;
 import com.ChickenTest.FarmApp.Models.Chicken;
 import com.ChickenTest.FarmApp.Repositories.ChickenRepository;
+import com.ChickenTest.FarmApp.Services.FarmServices;
 
-@org.springframework.web.bind.annotation.RestController
+
+@RestController
 @RequestMapping("/api")
 public class ChickenRestController {
 
+	@SuppressWarnings("unused")
 	@Autowired
     private ChickenRepository chickenRepository;
 	
 	 @RequestMapping("/chickens")
-	    public List<Object> getChickens(){
-	    	return ((Collection<Chicken>) chickenRepository
-	    			.findAll())
-	    			.stream()
-	    			.map(chicken -> chickenDTO(chicken))
-	    			.collect(Collectors.toList());
-	    }
-	    
-	    public Map<String, Object> chickenDTO(Chicken chicken){
-	    	Map<String, Object> dto = new LinkedHashMap<>();
-	        dto.put("id", chicken.getId());
-	        dto.put("farmId", chicken.getFarm().getId());
-	        dto.put("eggsAmount", chicken.getEggsAmount());
-	   
-	    	return dto;
+	  public List<Object> getFarm(){
+	    	return FarmServices.getFarms();  
+	 
+	 /* */
 	    }
 }
