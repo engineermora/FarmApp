@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Egg {
 
@@ -48,11 +50,16 @@ public class Egg {
 		this.creationDate = creationDate;
 	} 
 	
+	@JsonIgnore
 	public Chicken getChicken() {
 		return this.chicken;
 	}
 	
 	public void setId(Chicken chicken) {
+		this.chicken = chicken;
+	}
+	
+	public void setChicken(Chicken chicken) {
 		this.chicken = chicken;
 	}
 }

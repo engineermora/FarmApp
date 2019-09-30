@@ -13,6 +13,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
+
 @Entity
 public class Farm {
 	
@@ -23,11 +24,15 @@ public class Farm {
 	
 	private Date creationDate = new Date();
 	
+	private String name;
+	
 	@OneToMany(mappedBy = "farm", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
 	private List<Chicken> chickens = new LinkedList<Chicken>();
 	
 	public Farm() {};
+	
+		////* Getters and Setters*////
 	
 	public Farm(List<Chicken> chickens) {
 		this.chickens = chickens;
@@ -56,11 +61,27 @@ public class Farm {
 		this.chickens = chickens;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void addChicken(Chicken chicken) {
 		this.chickens.add(chicken);
 	}
 	
 	public void addChickens(List<Chicken> chickens) {
+		this.chickens.addAll(chickens);
+	}
+	
+	public void farmAdd(Chicken chicken) {
+		this.chickens.add(chicken);
+	}
+	
+	public void farmAdd(List<Chicken> chickens) {
 		this.chickens.addAll(chickens);
 	}
 	
@@ -76,9 +97,9 @@ public class Farm {
 		return eggsAmount;
 	}
 
-	public void deleteChicken(Chicken chicken){
-		Chicken chickenToDelete = this.chickens.get( (int) chicken.getId());
-		chickens.remove(chicken);
+	public void delete(Chicken nowChicken) {
+		
+		chickens.remove(nowChicken) ;
 	}
 }
 

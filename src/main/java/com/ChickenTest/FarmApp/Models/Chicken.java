@@ -17,6 +17,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Chicken {
 	
@@ -27,7 +29,7 @@ public class Chicken {
 	
 	private Date joinDate = new Date();
 
-	private boolean inFarm = true;
+	private boolean chickenStatus = true;
 	
 	@OneToMany(mappedBy = "chicken", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -37,25 +39,36 @@ public class Chicken {
     @JoinColumn(name = "farmId")
 	private Farm farm;
 	
+	private String name;
+	
 	public Chicken() {};
 	
 	public Chicken(Farm farm) {
 		this.farm = farm;
-		this.inFarm = true;
+		this.chickenStatus = true;
 	}
 
 	public Chicken(Farm farm, List<Egg> eggs) {
 		this.farm = farm;
 		this.eggs = eggs;
-		this.inFarm = true;
+		this.chickenStatus = true;
 	}
 	
-	public Chicken(List<Egg> eggs, boolean inFarm) {
+	public Chicken(List<Egg> eggs, boolean statusInFarm) {
 		this.eggs = eggs;
-		this.inFarm = inFarm;
+		this.chickenStatus = statusInFarm;
 	}
 	
-	// Identification de los Chickens.
+	
+	public Chicken(Farm farm, String name) {
+		super();
+		this.farm = farm;
+		this.chickenStatus = true;
+		this.name = name;
+	}
+
+		//* GETTERS AND SETTERS : chicken*//
+	
 	public long getId() {
 		return this.id;
 	}
@@ -64,7 +77,14 @@ public class Chicken {
 		this.id = id;
 	}
 	
-	// Fecha de ingreso de Chickens.
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public Date getJoinDate() {
 		return this.joinDate;
 	}
@@ -73,8 +93,7 @@ public class Chicken {
 		this.joinDate = joinDate;
 	} 
 	
-	// Obtencion de la farm a la que pertenecen los Chickens.
-	
+	@JsonIgnore
 	public Farm getFarm() {
 		return this.farm;
 	}
@@ -83,17 +102,24 @@ public class Chicken {
 		this.farm = farm;
 	} 
 	
+	//* Metodos para chicken*//
 	
-	// Status del Chicken si esta en Farm o no.
-	public boolean getInFarm(){
-		return this.inFarm;
+	public boolean getStatusInFarm(){
+		return this.chickenStatus;
 	}
 
-	public void setInFarm(Boolean inFarm) {
-		this.inFarm = inFarm;
+	public void setStatusInFarm(Boolean statusInFarm) {
+		this.chickenStatus = statusInFarm;
 	}
 
-	// Lista de eggs
+	public boolean isChickenStatus() {
+		return chickenStatus;
+	}
+
+	public void setChickenStatus(boolean chickenStatus) {
+		this.chickenStatus = chickenStatus;
+	}
+
 	public List<Egg> getEggs() {
 		return this.eggs;
 	}
@@ -101,10 +127,13 @@ public class Chicken {
 	public void setEggs(List<Egg> eggs) {
 		this.eggs = eggs;
 	}
-	
-	// Other Methods
+
 	public void addEggs(List<Egg> eggs) {
 		this.eggs.addAll(eggs);
+	}
+	
+	public void addEgg(Egg egg) {
+		this.eggs.add(egg);
 	}
 	
 	public int getEggsAmount() {

@@ -6,7 +6,10 @@ import java.util.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.ChickenTest.FarmApp.Models.Chicken;
 import com.ChickenTest.FarmApp.Models.Egg;
@@ -16,6 +19,9 @@ import com.ChickenTest.FarmApp.Repositories.EggRepository;
 import com.ChickenTest.FarmApp.Repositories.FarmRepository;
 
 @SpringBootApplication
+@ComponentScan({"com.ChickenTest.FarmApp.Controllers"})
+@EntityScan("com.ChickenTest.FarmApp.Models")
+@EnableJpaRepositories("com.ChickenTest.FarmApp.Repositories")
 public class FarmAppApplication {
 
 	public static void main(String[] args) {
@@ -32,9 +38,9 @@ public class FarmAppApplication {
 			
 			farmRepository.save(farm);
 			
-			Chicken chicken1 = new Chicken(farm);
-			Chicken chicken2 = new Chicken(farm);
-			Chicken chicken3 = new Chicken(farm);
+			Chicken chicken1 = new Chicken(farm, "Lola");
+			Chicken chicken2 = new Chicken(farm, "La locura");
+			Chicken chicken3 = new Chicken(farm, "Incoherente");
 			
 			List<Chicken> chickensToFarm = new LinkedList<Chicken>();
 			chickensToFarm.add(chicken1);

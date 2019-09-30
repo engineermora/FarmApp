@@ -1,39 +1,44 @@
 package com.ChickenTest.FarmApp.Controllers;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.*;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ChickenTest.FarmApp.Models.Egg;
-import com.ChickenTest.FarmApp.Repositories.EggRepository;
-
+import com.ChickenTest.FarmApp.DTO.EggDTO;
+import com.ChickenTest.FarmApp.Services.EggServices;
 
 @RestController
 @RequestMapping("/api")
+@ComponentScan({"com.ChickenTest.FarmApp.Services"})
 public class EggRestController {
 
-	  @Autowired
-	    private EggRepository EggRepository;
-	  
-	    @RequestMapping("/eggs")
-	    public List<Object> getEggs(){ // Aqui llama a los services
-	    	return ((Collection<Egg>) EggRepository // desde aqui
-	    			.findAll())
-	    			.stream()
-	    			.map(egg -> eggDTO(egg))
-	    			.collect(Collectors.toList()); // hasta aca
+
+	    @Autowired
+	    private EggServices eggServices;
+
+	    @CrossOrigin(origins = "http://localhost:4200")
+	    @RequestMapping(path = "/eggs", method = RequestMethod.GET)
+	    public List<Object> getEggs(){
+	    	return eggServices.getData();
 	    }
-	    
-	    public Map<String, Object> eggDTO(Egg egg){
-	    	Map<String, Object> dto = new LinkedHashMap<>();
-	        dto.put("id", egg.getId());
-	        dto.put("chickenId", egg.getChicken().getId());
+
+	    @CrossOrigin(origins = "http://localhost:4200")
+	    @RequestMapping(path ="/add_egg", method = RequestMethod.POST)
+	    public EggDTO addEgg(@RequestBody EggDTO eggDTO){
+	    	EggDTO eggDTOAdded = eggServices.add(eggDTO);
+	    	return eggDTOAdded;
+	    }
 	   
-	    	return dto;
+	    @CrossOrigin(origins = "http://localhost:4200")
+	    @RequestMapping(path ="/delete_egg", method = RequestMethod.POST)
+	    public EggDTO deleteEgg(@RequestBody EggDTO eggDTO){
+	    	EggDTO eggDTODelete = eggServices.delete(eggDTO);
+	    	return eggDTODelete;
 	    }
 }

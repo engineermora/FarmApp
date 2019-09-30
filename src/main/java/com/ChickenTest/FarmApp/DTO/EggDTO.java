@@ -1,10 +1,11 @@
 package com.ChickenTest.FarmApp.DTO;
 
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
+import com.ChickenTest.FarmApp.Models.Chicken;
 import com.ChickenTest.FarmApp.Models.Egg;
+
 
 public class EggDTO {
 	
@@ -14,7 +15,7 @@ public class EggDTO {
 	
 	private long chickenId;
 	
-	public List<Egg> EggColor = new LinkedList<Egg>();
+//	public List<Egg> EggColor = new LinkedList<Egg>();
 	
 	//* Getters and Setters*//
 
@@ -41,18 +42,21 @@ public class EggDTO {
 	public void setChickenId(long chickenId) {
 		this.chickenId = chickenId;
 	}
-
-	public List<Egg> getEggColor() {
+	/* public void addChicken(Chicken chicken) {
+		this.eggs.add(chicken);
+	}
+	
+	/* public void add(List<Egg> egg) {
+		this.eggs.addAll(egg);
+	} */
+	
+	
+	
+/*	public List<Egg> getEggColor() {
 		return EggColor;
 	}
 
 	public void setEggColor(List<Egg> eggColor) {
 		EggColor = eggColor;
-	}
-
-	
-	
-	
-	
-	
+	}	*/
 }

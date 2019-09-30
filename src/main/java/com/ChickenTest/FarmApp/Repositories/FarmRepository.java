@@ -6,4 +6,6 @@ import com.ChickenTest.FarmApp.Models.Farm;
 
 @RepositoryRestResource
 public interface FarmRepository extends JpaRepository<Farm, Long>{
+
 }
+

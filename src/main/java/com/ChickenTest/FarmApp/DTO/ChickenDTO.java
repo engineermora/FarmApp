@@ -1,24 +1,32 @@
 package com.ChickenTest.FarmApp.DTO;
 
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
-import com.ChickenTest.FarmApp.Models.Chicken;
 
 public class ChickenDTO {
 	
 	private long id;
-	private Date joinDate;
+	
+	private String name;
+
 	private boolean FarmStatusChicken;
 	
-	public List<Chicken> chickensType = new LinkedList<Chicken>();
-
+	private Date joinDate = new Date();
+	
+	private long farmId;
 	
 	//* Getters and Setters *//
 	
 	public long getId() {
 		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setId(long id) {
@@ -41,16 +49,11 @@ public class ChickenDTO {
 		FarmStatusChicken = farmStatusChicken;
 	}
 
-	public List<Chicken> getChickensType() {
-		return chickensType;
+	public long getFarmId() {
+		return farmId;
 	}
 
-	public void setChickensType(List<Chicken> chickensType) {
-		this.chickensType = chickensType;
+	public void setFarmId(long farmId) {
+		this.farmId = farmId;
 	}
-	
-
-	
-	
-
 }
