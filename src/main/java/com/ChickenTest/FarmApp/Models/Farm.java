@@ -31,7 +31,7 @@ public class Farm {
 	private List<Chicken> chickens = new LinkedList<Chicken>();
 	
 	public Farm() {};
-	
+
 		////* Getters and Setters*////
 	
 	public Farm(List<Chicken> chickens) {

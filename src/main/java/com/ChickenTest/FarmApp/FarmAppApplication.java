@@ -33,10 +33,11 @@ public class FarmAppApplication {
 												ChickenRepository chickenRepository,
 												EggRepository eggRepository) {
 		return (String... args) -> {
-			
+		
 			Farm farm = new Farm();
 			
 			farmRepository.save(farm);
+			
 			
 			Chicken chicken1 = new Chicken(farm, "Lola");
 			Chicken chicken2 = new Chicken(farm, "La locura");

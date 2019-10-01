@@ -136,6 +136,13 @@ public class Chicken {
 		this.eggs.add(egg);
 	}
 	
+	public void deleteEggs(List<Egg> eggs) {
+		this.eggs.remove(eggs);
+	}
+	public void deleteEgg(Egg egg) {
+		this.eggs.remove(egg);
+	}
+	
 	public int getEggsAmount() {
 		return this.eggs.size();
 	}

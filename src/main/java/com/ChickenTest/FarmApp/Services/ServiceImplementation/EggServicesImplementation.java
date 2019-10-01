@@ -28,7 +28,7 @@ public class EggServicesImplementation implements EggServices {
 	@Autowired
 	private ChickenRepository chickenRepository;
 
-	@RequestMapping(path = "/eggs", method = RequestMethod.GET)
+	@RequestMapping(path = "/egg", method = RequestMethod.GET)
 	public List<Object> getData(){
 	    	return eggRepository
 	    			.findAll()
@@ -38,16 +38,16 @@ public class EggServicesImplementation implements EggServices {
 	    }
 	 
 	public EggDTO getEggData(Egg egg){
-	Egg nowEgg = eggRepository.findById(egg.getId()).get();	
-	EggDTO eggDTO = new EggDTO();
-	    	
-	eggDTO.setId(nowEgg.getId());
-	eggDTO.setChickenId(nowEgg.getChicken().getId());
-	eggDTO.setCreationDate(nowEgg.getcreationDate());
+		Egg nowEgg = eggRepository.findById(egg.getId()).get();	
+		EggDTO eggDTO = new EggDTO();
 		    	
-	return eggDTO;
-	
-	}
+		eggDTO.setId(nowEgg.getId());
+		eggDTO.setChickenId(nowEgg.getChicken().getId());
+		eggDTO.setCreationDate(nowEgg.getcreationDate());
+			    	
+		return eggDTO;
+		
+		}
 
 	@Override
 	public EggDTO add(EggDTO eggDTO) {
@@ -68,4 +68,16 @@ public class EggServicesImplementation implements EggServices {
 		return eggAddDTO;
 						
 	}
+
+	@Override
+	public EggDTO delete(EggDTO eggDTO) {
+
+		Egg nowEgg = eggRepository.findById(eggDTO.getId()).get();
+        Chicken nowChicken = chickenRepository.findById(eggDTO.getChickenId()).get();
+        nowChicken.deleteEgg(nowEgg);
+        eggRepository.deleteById(eggDTO.getId());
+	       	       
+		return eggDTO;
+	}
+	
 }

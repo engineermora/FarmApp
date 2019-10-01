@@ -27,6 +27,7 @@ public class Egg {
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "chickenId")
 	private Chicken chicken;
+
 	
 	public Egg() {};
 

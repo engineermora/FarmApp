@@ -42,19 +42,19 @@ public class FarmServiceImplementation implements FarmServices {
         	farmDTO.setId(nowFarm.getId());
         	farmDTO.setCreationDate(nowFarm.getCreationDate());
         	farmDTO.setFarmName(nowFarm.getName());
-        	farmDTO.setChickens(nowFarm.getChickens());
+        	//farmDTO.setChickens(nowFarm.getChickens());
         	farmDTO.setChickensAmount(nowFarm.getChickensAmount());
         	farmDTO.setEggsAmount(nowFarm.getEggsAmountTotal());
         	
         	return farmDTO;
         }
-    
+    // Agregar Granja
     @Override
 		public FarmDTO add(FarmDTO farmDTO) {
 		Farm farmAdd = new Farm();
     	FarmDTO farmAddDTO = new FarmDTO();
     	
-        farmAdd.setName(farmDTO.getFarmName());
+    	farmAdd.setName(farmDTO.getFarmName());
         farmAdd.setCreationDate(farmDTO.getCreationDate());
         farmRepository.save(farmAdd);
     	
@@ -64,7 +64,7 @@ public class FarmServiceImplementation implements FarmServices {
 		
 		return farmAddDTO;
 	}
-
+// Eliminar granja
 	@Override
 		public FarmDTO delete(FarmDTO farmDTO) {
         Farm nowFarm = farmRepository.findById(farmDTO.getId()).get();

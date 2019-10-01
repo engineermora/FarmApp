@@ -2,7 +2,6 @@ package com.ChickenTest.FarmApp.Services;
 
 import java.util.List;
 
-import com.ChickenTest.FarmApp.DTO.ChickenDTO;
 import com.ChickenTest.FarmApp.DTO.FarmDTO;
 import com.ChickenTest.FarmApp.Models.Farm;
 
